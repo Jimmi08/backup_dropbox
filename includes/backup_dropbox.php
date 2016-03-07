@@ -126,7 +126,7 @@ class backup_dropbox
 	}
 
 	/**
-	 * Create the DropBox object from BenTheDesigner's PHP API.
+	 * Create the DropBox object from BenExile's PHP API.
 	 */
 	function dropboxObject()
 	{
