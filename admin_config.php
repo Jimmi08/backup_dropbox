@@ -111,10 +111,13 @@ class backup_dropbox_admin_ajax_ui extends e_admin_ui
 	 */
 	public function ajaxEncrypt()
 	{
+		// 32-byte encryption key.
+		$key = md5(time());
+
 		$ajax = e107::ajax();
 
 		$commands = array();
-		$commands[] = $ajax->commandInvoke('#encryption', 'val', array(md5(time())));
+		$commands[] = $ajax->commandInvoke('#encryption', 'val', array($key));
 
 		$ajax->response($commands);
 		exit;
@@ -196,12 +199,11 @@ class backup_dropbox_admin_ui extends e_admin_ui
 	{
 		$form = e107::getForm();
 
+		// Ajax button to generate random encryption key.
 		$this->prefs['encryption']['writeParms']['class'] = 'pull-left';
-
 		$this->prefs['encryption']['writeParms']['post'] = $form->button('generate', LAN_BACKUP_DROPBOX_ADMIN_12, 'action', '', array(
 			'class'       => 'e-ajax',
 			'data-src'    => e_SELF . '?mode=ajax&action=encrypt',
-			'data-target' => '#encryption',
 		));
 	}
 }
