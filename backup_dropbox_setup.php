@@ -105,10 +105,10 @@ class backup_dropbox_setup
 				// If 'not found'.
 				if($error == LAN_LIBRARY_MANAGER_09)
 				{
-					$x = 'https://github.com/BenTheDesigner/Dropbox';
+					$x = 'https://github.com/BenExile/Dropbox';
 					$y = '{e_WEB}/lib/dropbox';
 
-					// BenTheDesigner's Dropbox REST API library is missing, please download it from [x]
+					// BenExile's Dropbox REST API library is missing, please download it from [x]
 					// and place it at [y].
 					$help = e107::getParser()->lanVars(LAN_PLUGIN_BACKUP_DROPBOX_LIBRARY_01, array($x, $y), true);
 					$msg->addWarning($help);

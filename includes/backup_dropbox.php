@@ -107,6 +107,11 @@ class backup_dropbox
 			$path = $this->plugPrefs['path'];
 		}
 
+		if(!method_exists($dropbox, 'putFile'))
+		{
+			return false;
+		}
+
 		try
 		{
 			$result = $dropbox->putFile($file, $filename, $path, $overwrite);
@@ -130,9 +135,29 @@ class backup_dropbox
 			// Load 'dropbox' library.
 			if(($library = e107::library('load', 'dropbox')) && !empty($library['loaded']))
 			{
+				$path = e_WEB . 'lib/dropbox/';
+
+				set_include_path($path);
+
+				spl_autoload_register(function ($class)
+				{
+					// Base directory for the namespace prefix
+					$base_dir = e_WEB . 'lib/dropbox/';
+
+					// Replace the namespace prefix with the base directory, replace namespace
+					// separators with directory separators in the relative class name, append
+					// with .php
+					$file = $base_dir . str_replace('\\', '/', $class) . '.php';
+
+					// If the file exists, require it.
+					if (file_exists($file)) {
+						e107_require_once($file);
+					}
+				});
+
 				$appKey = varset($this->plugPrefs['app_key'], '');
 				$appSecret = varset($this->plugPrefs['app_secret'], '');
-				$encryptionKey = varset($this->plugPrefs['encryption_key'], '');
+				$encryptionKey = varset($this->plugPrefs['encryption'], '');
 
 				// Instantiate the Encrypter and storage objects.
 				$encrypter = new \Dropbox\OAuth\Storage\Encrypter($encryptionKey);

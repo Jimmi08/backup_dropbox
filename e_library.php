@@ -116,9 +116,9 @@ class backup_dropbox_library
 		// BenTheDesigner's Dropbox REST API library.
 		$libraries['dropbox'] = array(
 			'name'              => 'PHP 5.3 SDK for the Dropbox REST API',
-			'vendor url'        => 'https://github.com/BenTheDesigner/Dropbox',
-			'download url'      => 'https://github.com/BenExile/Dropbox/archive/master.zip',
-			'version callback'  => 'dropbox_version_callback',
+			'vendor_url'        => 'https://github.com/BenExile/Dropbox',
+			'download_url'      => 'https://github.com/BenExile/Dropbox/archive/master.zip',
+			'version_callback'  => 'dropbox_version_callback',
 			'files'             => array(
 				'php' => array(
 					'Dropbox/API.php',
@@ -134,6 +134,6 @@ class backup_dropbox_library
 	 */
 	function dropbox_version_callback()
 	{
-		return '1.0';
+		return 1.0;
 	}
 }
