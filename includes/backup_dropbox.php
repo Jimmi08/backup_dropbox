@@ -135,13 +135,10 @@ class backup_dropbox
 			// Load 'dropbox' library.
 			if(($library = e107::library('load', 'dropbox')) && !empty($library['loaded']))
 			{
-				$path = e_WEB . 'lib/dropbox/';
-
-				set_include_path($path);
-
+				set_include_path(e_WEB . 'lib/dropbox/');
 				spl_autoload_register(function ($class)
 				{
-					// Base directory for the namespace prefix
+					// Base directory for the namespace prefix.
 					$base_dir = e_WEB . 'lib/dropbox/';
 
 					// Replace the namespace prefix with the base directory, replace namespace
