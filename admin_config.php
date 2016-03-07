@@ -114,7 +114,7 @@ class backup_dropbox_admin_ajax_ui extends e_admin_ui
 		// 32-byte encryption key.
 		$key = md5(time());
 
-		$ajax = e107::ajax();
+		$ajax = e107::getAjax();
 
 		$commands = array();
 		$commands[] = $ajax->commandInvoke('#encryption', 'val', array($key));
