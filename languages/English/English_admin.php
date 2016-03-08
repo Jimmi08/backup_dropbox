@@ -24,3 +24,11 @@ define("LAN_BACKUP_DROPBOX_ADMIN_HELP_03", "[b]Step 1:[/b] Create a DropBox App 
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_04", "[b]Step 2:[/b] Once the app is created, take note of your app's [b]App key[/b] and [b]App secret[/b] and enter both of them below.");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_05", "[b]Step 3:[/b] You may also enter a [b]path[/b] that will be used inside your app's folder. For example, if you enter [b]fluffy/white[b] as your path, then backups will be placed in the [b]DropBox/Apps/kittens/fluffy/white/[/b] directory.");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_06", "[b]Step 4:[/b] Enter a 32-charater encryption key. We're not 100% sure if this is the best way to handle this, but for now, it works.");
+define("LAN_BACKUP_DROPBOX_ADMIN_HELP_07", "[b]Step 5:[/b] Go to [b]Account Info[/b] to connect your DropBox account.");
+
+define("LAN_BACKUP_DROPBOX_ADMIN_13", "Account Info");
+define("LAN_BACKUP_DROPBOX_ADMIN_14", "Token is invalid, please generate a new encryption key, and try to re-authenticate.");
+define("LAN_BACKUP_DROPBOX_ADMIN_15", "Display Name");
+define("LAN_BACKUP_DROPBOX_ADMIN_16", "E-mail");
+define("LAN_BACKUP_DROPBOX_ADMIN_17", "Team");
+define("LAN_BACKUP_DROPBOX_ADMIN_18", "Country");

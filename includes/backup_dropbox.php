@@ -128,7 +128,7 @@ class backup_dropbox
 	/**
 	 * Create the DropBox object from BenExile's PHP API.
 	 */
-	function dropboxObject()
+	public function dropboxObject()
 	{
 		if(!$this->dropbox)
 		{
@@ -147,7 +147,8 @@ class backup_dropbox
 					$file = $base_dir . str_replace('\\', '/', $class) . '.php';
 
 					// If the file exists, require it.
-					if (file_exists($file)) {
+					if(file_exists($file))
+					{
 						e107_require_once($file);
 					}
 				});
@@ -162,9 +163,54 @@ class backup_dropbox
 				// Create the storage object, passing it the Encrypter object.
 				$storage = new \Dropbox\OAuth\Storage\Session($encrypter);
 
-				// Create the consumer and API objects.
-				$OAuth = new \Dropbox\OAuth\Consumer\Curl($appKey, $appSecret, $storage, e_SELF);
-				$this->dropbox = new \Dropbox\API($OAuth);
+				// Get saved token and secret.
+				$oauthToken = varset($this->plugPrefs['oauth_token'], false);
+				$oauthTokenSecret = varset($this->plugPrefs['oauth_token_secret'], false);
+
+				// Connect with using saved token and secret.
+				if($oauthToken && $oauthTokenSecret)
+				{
+					$token = new \stdClass();
+					$token->oauth_token = $oauthToken;
+					$token->oauth_token_secret = $oauthTokenSecret;
+					$storage->set($token, 'access_token');
+				}
+
+				try
+				{
+					// Create the consumer and API objects.
+					$OAuth = new \Dropbox\OAuth\Consumer\Curl($appKey, $appSecret, $storage, e_REQUEST_URL);
+				} catch(\Dropbox\Exception $e)
+				{
+					return $e->getMessage();
+				}
+
+				try
+				{
+					$this->dropbox = new \Dropbox\API($OAuth);
+				} catch(\Dropbox\Exception $e)
+				{
+					return $e->getMessage();
+				}
+
+				// If DropBox object has been created successfully, we save token and secret for later use.
+				if($this->dropbox && (!$oauthToken || !$oauthTokenSecret))
+				{
+					$config = e107::getPlugConfig('backup_dropbox');
+					$token = $storage->get('access_token');
+
+					if(isset($token->oauth_token_secret))
+					{
+						$config->set('oauth_token_secret', $token->oauth_token_secret);
+					}
+
+					if(isset($token->oauth_token))
+					{
+						$config->set('oauth_token', $token->oauth_token);
+					}
+
+					$config->save(false, true, false);
+				}
 			}
 		}
 

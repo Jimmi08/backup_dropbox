@@ -38,10 +38,14 @@ class backup_dropbox_admin extends e_admin_dispatcher
 	 * @var array
 	 */
 	protected $modes = array(
-		'ajax' => array(
+		'ajax'    => array(
 			'controller' => 'backup_dropbox_admin_ajax_ui',
 		),
-		'main' => array(
+		'account' => array(
+			'controller' => 'backup_dropbox_admin_account_ui',
+			'path'       => null,
+		),
+		'main'    => array(
 			'controller' => 'backup_dropbox_admin_ui',
 			'path'       => null,
 		),
@@ -68,8 +72,12 @@ class backup_dropbox_admin extends e_admin_dispatcher
 	 * @var array
 	 */
 	protected $adminMenu = array(
-		'main/prefs' => array(
+		'main/prefs'   => array(
 			'caption' => LAN_BACKUP_DROPBOX_ADMIN_01,
+			'perm'    => 'P',
+		),
+		'account/info' => array(
+			'caption' => LAN_BACKUP_DROPBOX_ADMIN_13,
 			'perm'    => 'P',
 		),
 	);
@@ -121,6 +129,77 @@ class backup_dropbox_admin_ajax_ui extends e_admin_ui
 
 		$ajax->response($commands);
 		exit;
+	}
+
+}
+
+
+/**
+ * Class backup_dropbox_admin_account_ui.
+ */
+class backup_dropbox_admin_account_ui extends e_admin_ui
+{
+
+	/**
+	 * Could be LAN constant (multi-language support).
+	 *
+	 * @var string plugin name
+	 */
+	protected $pluginTitle = LAN_PLUGIN_BACKUP_DROPBOX_NAME;
+
+	/**
+	 * Display a page with account details.
+	 */
+	public function infoPage()
+	{
+		$mes = e107::getMessage();
+
+		e107_require_once(e_PLUGIN . 'backup_dropbox/includes/backup_dropbox.php');
+
+		$bd = new backup_dropbox();
+		$dropbox = $bd->dropboxObject();
+
+		if(is_string($dropbox))
+		{
+			$mes->addWarning($dropbox);
+			return $mes->render();
+		}
+
+		try
+		{
+			// Attempt to retrieve the account information
+			$accountInfo = $dropbox->accountInfo();
+		} catch(\Dropbox\Exception $e)
+		{
+			$mes->addWarning($e->getMessage());
+			return $mes->render();
+		}
+
+		if(isset($accountInfo['code']) && $accountInfo['code'] == 200)
+		{
+			$tpl = e107::getTemplate('backup_dropbox');
+			$sc = e107::getScBatch('backup_dropbox', true);
+			$tp = e107::getParser();
+
+			$details = $accountInfo['body'];
+
+			$scVars = array(
+				'name_label'    => LAN_BACKUP_DROPBOX_ADMIN_15,
+				'name_value'    => varset($details->display_name, '-'),
+				'email_label'   => LAN_BACKUP_DROPBOX_ADMIN_16,
+				'email_value'   => varset($details->email, '-'),
+				'team_label'    => LAN_BACKUP_DROPBOX_ADMIN_17,
+				'team_value'    => varset($details->team, '-'),
+				'country_label' => LAN_BACKUP_DROPBOX_ADMIN_18,
+				'country_value' => varset($details->country, '-'),
+			);
+
+			$sc->setVars($scVars);
+			return $tp->parseTemplate($tpl['ACCOUNT_INFO'], true, $sc);
+		}
+
+		$mes->addError(LAN_BACKUP_DROPBOX_ADMIN_14);
+		return $mes->render();
 	}
 
 }
@@ -202,8 +281,8 @@ class backup_dropbox_admin_ui extends e_admin_ui
 		// Ajax button to generate random encryption key.
 		$this->prefs['encryption']['writeParms']['class'] = 'pull-left';
 		$this->prefs['encryption']['writeParms']['post'] = $form->button('generate', LAN_BACKUP_DROPBOX_ADMIN_12, 'action', '', array(
-			'class'       => 'e-ajax',
-			'data-src'    => e_SELF . '?mode=ajax&action=encrypt',
+			'class'    => 'e-ajax',
+			'data-src' => e_SELF . '?mode=ajax&action=encrypt',
 		));
 	}
 }

@@ -12,5 +12,7 @@
 		<pref name="app_key"></pref>
 		<pref name="app_secret"></pref>
 		<pref name="encryption"></pref>
+		<pref name="oauth_token"></pref>
+		<pref name="oauth_token_secret"></pref>
 	</pluginPrefs>
 </e107Plugin>
