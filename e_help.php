@@ -22,7 +22,8 @@ switch($action)
 		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_04 . '<br/><br/>';
 		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_05 . '<br/><br/>';
 		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_06 . '<br/><br/>';
-		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_07;
+		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_07 . '<br/><br/>';
+		$text .= LAN_BACKUP_DROPBOX_ADMIN_HELP_08;
 	}
 }
 

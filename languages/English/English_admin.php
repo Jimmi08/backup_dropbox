@@ -22,9 +22,10 @@ define("LAN_BACKUP_DROPBOX_ADMIN_HELP_01", "Help");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_02", "In order to use your Dropbox account as a Backup destination, you must create a [b]Dropbox App[/b] and obtain your app credentials and enter them on this form.");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_03", "[b]Step 1:[/b] Create a Dropbox App by logging into your Dropbox account and going to [url=https://www.dropbox.com/developers/apps]here[/url] and clicking the button to [b]Create an app[/b]. Be sure to give your app a descriptive name, as the name you give it will be part of the path within your Dropbox folder. For example, if you create an app called [b]kittens[/b], then Dropbox will create a [b]Dropbox/Apps/kittens[/b] directory in your Dropbox folder.");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_04", "[b]Step 2:[/b] Once the app is created, take note of your app's [b]App key[/b] and [b]App secret[/b] and enter both of them below.");
-define("LAN_BACKUP_DROPBOX_ADMIN_HELP_05", "[b]Step 3:[/b] You may also enter a [b]path[/b] that will be used inside your app's folder. For example, if you enter [b]fluffy/white[b] as your path, then backups will be placed in the [b]Dropbox/Apps/kittens/fluffy/white/[/b] directory.");
-define("LAN_BACKUP_DROPBOX_ADMIN_HELP_06", "[b]Step 4:[/b] Enter a 32-charater encryption key. We're not 100% sure if this is the best way to handle this, but for now, it works.");
+define("LAN_BACKUP_DROPBOX_ADMIN_HELP_05", "[b]Step 3:[/b] You may also enter a [b]path[/b] that will be used inside your app's folder. For example, if you enter [b]fluffy/white[/b] as your path, then backups will be placed in the [b]Dropbox/Apps/kittens/fluffy/white/[/b] directory.");
+define("LAN_BACKUP_DROPBOX_ADMIN_HELP_06", "[b]Step 4:[/b] Enter a 32-charater encryption key. Just click on the [b]Generate[/b] button.");
 define("LAN_BACKUP_DROPBOX_ADMIN_HELP_07", "[b]Step 5:[/b] Go to [b]Account Info[/b] to connect your Dropbox account.");
+define("LAN_BACKUP_DROPBOX_ADMIN_HELP_08", "[b]Step 6:[/b] Enable [b]Backup to Dropbox[/b] task on the [b]Schedule Tasks[/b] page.");
 
 define("LAN_BACKUP_DROPBOX_ADMIN_13", "Account Info");
 define("LAN_BACKUP_DROPBOX_ADMIN_14", "Token is invalid, please generate a new encryption key, and try to re-authenticate.");
