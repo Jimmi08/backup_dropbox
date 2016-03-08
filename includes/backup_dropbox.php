@@ -20,7 +20,7 @@ class backup_dropbox
 	private $plugPrefs = array();
 
 	/**
-	 * DropBox object.
+	 * Dropbox object.
 	 *
 	 * @var null|object
 	 */
@@ -36,7 +36,7 @@ class backup_dropbox
 	}
 
 	/**
-	 * Try to make backup files and export them to DropBox.
+	 * Try to make backup files and export them to Dropbox.
 	 */
 	public function doBackup()
 	{
@@ -84,7 +84,7 @@ class backup_dropbox
 	}
 
 	/**
-	 * Save to to the DropBox destination.
+	 * Save to to the Dropbox destination.
 	 *
 	 * @param string $file
 	 *  Absolute path to the file to be uploaded.
@@ -96,7 +96,7 @@ class backup_dropbox
 	 *  Should the file be overwritten? (Default: true).
 	 *
 	 * @return boolean|object
-	 *  FALSE if uploading was not successful, otherwise result object from DropBox.
+	 *  FALSE if uploading was not successful, otherwise result object from Dropbox.
 	 */
 	public function saveFile($file, $filename = false, $path = '', $overwrite = true)
 	{
@@ -126,7 +126,7 @@ class backup_dropbox
 	}
 
 	/**
-	 * Create the DropBox object from BenExile's PHP API.
+	 * Create the Dropbox object from BenExile's PHP API.
 	 */
 	public function dropboxObject()
 	{
@@ -193,7 +193,7 @@ class backup_dropbox
 					return $e->getMessage();
 				}
 
-				// If DropBox object has been created successfully, we save token and secret for later use.
+				// If Dropbox object has been created successfully, we save token and secret for later use.
 				if($this->dropbox && (!$oauthToken || !$oauthTokenSecret))
 				{
 					$config = e107::getPlugConfig('backup_dropbox');

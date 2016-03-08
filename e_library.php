@@ -113,7 +113,7 @@ class backup_dropbox_library
 	 */
 	function config()
 	{
-		// BenTheDesigner's Dropbox REST API library.
+		// BenExile's Dropbox REST API library.
 		$libraries['dropbox'] = array(
 			'name'              => 'PHP 5.3 SDK for the Dropbox REST API',
 			'vendor_url'        => 'https://github.com/BenExile/Dropbox',
